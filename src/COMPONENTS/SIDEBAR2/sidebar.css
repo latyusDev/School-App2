@@ -1,0 +1,13 @@
+.active{
+    /* border-left: 6px solid #7990A3; */
+    border-left: 6px solid #2c86cf;
+    color: #2c86cf;
+    border-bottom-left-radius: 20px;
+}
+
+.border{
+    border: 3px solid #2c86cf;
+}
+.sidemenu{
+    transition:1s;
+}
