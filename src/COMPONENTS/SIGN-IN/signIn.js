@@ -3,6 +3,7 @@ import { FaFacebookF, FaBars } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import {useNavigate, Link } from "react-router-dom";
 
+const getItems = JSON.parse(sessionStorage.getItem('member'))
 
 const SignIn = ()=>{
     const [password, setPassword] = useState('')
@@ -13,31 +14,29 @@ const SignIn = ()=>{
     const refContainer = useRef(null)
 
     const navigate = useNavigate()
-    
+    // console.log(getItems.password)
     // const check = refContainer.current
 
     const handleCheck =()=>{
         const check = refContainer.current.checked
+
         if(check === true){
             console.log('yes')
             setCheckIt(true)
-            setRemember('checked  ')
-            // setRemember('checked &#;')
+            setRemember('checked')
         }else{
             setRemember('remember me')
             setCheckIt(false)
-
-
         }
     }
     
     const handleSubmit = (e)=>{
         const check = refContainer.current.checked
         e.preventDefault()
+        
         if(!password || !email || !check){
             setAlert('input all fields')
             setRemember('check me!')
-            
             setTimeout(()=>setAlert(''), 3000)
         }else{
            navigate('/dashboard')

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 const SignUp = () => {
+    
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [fullName, setFullName] = useState('')
@@ -13,15 +14,23 @@ const SignUp = () => {
         if(!password || !email){
             setAlert('input all fields')
             setTimeout(()=>setAlert(''), 3000)
-            localStorage.removeItem('member')
+            // localStorage.removeItem('member')
         }else{
-            localStorage.setItem('member', JSON.stringify(member))
             setAlert('Well done, proceed to log in')
             setTimeout(()=>setAlert(''), 3000)
-            setMember({...member, email, password, id:new Date().getTime().toString() })
-
+            setMember({...member, email, password, id:new Date().getTime().toString()})
+            sessionStorage.setItem('member', JSON.stringify(member))
+       
         }
     }
+    const setItem = ()=>{
+
+        sessionStorage.setItem('member', JSON.stringify(member))
+    }
+    useEffect(() => {
+        setItem()
+    }, [member])
+    
   return (
     <section className="flex justify-center items-center
     bg-[#e4e8eb]
@@ -66,7 +75,7 @@ const SignUp = () => {
     </div>
     <div className="flex justify-between  mt-4">
         <p className="text-[#011E3D]">already have an account ?  </p>
-        <p className="text-[#5193EA]">
+        <p className="text-[#5193EA]" onClick={()=>window.location.reload()}>
             <Link to="/">
             sign in
             </Link>
